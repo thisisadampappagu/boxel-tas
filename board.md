@@ -29,3 +29,4 @@ Append one line per update: HH:MM <agent>: <what's running> | <progress: frame, 
 22:53 l39c: new session; w1 seed=718 run @480 hx=30 hs=5 jrb=25 K=2000 T=730 (coordinator's edge idea) | pending | l39d?
 22:55 l39d: (new session) started e1 seed=718 run @480 hx=30 hs=5 jrb=25 K=1500 smargin=0.3 T=724 | starting | none
 23:08 l39c: w1 (seed718@480 hx=30 K=2000) | t=620 x=-551 (v1 was -733@590) | polling
+23:13 l39c: w1 (seed718@480 hx=30) failed: x=-604@660, behind. Started w2 seed718@600 hx=25 hs=5 jrb=30 K=3000 T=718 | pending
