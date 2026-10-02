@@ -19,3 +19,4 @@ Append one line per update: HH:MM <agent>: <what's running> | <progress: frame, 
 21:40 l32c: starting v1 K=350 tw=4 hs=20 (1 core only; running sequentially) | - | -
 21:40 l32d: starting v1 seedT=100 K=800 trk32 tw=4 hs=20 (nproc=1, one at a time) | - | then seedT=150, 200 ...
 21:43 COORDINATOR (relaying Adam): keep running — do NOT stop early. Post a status line now: what's running, latest frame + x/lead vs the reference run, and your projected finish.
+21:45 l32c: v1 K=350 tw=4 hs=20 running | t~35, ~10s/frame on 1 core -> projected ~65+ min, finish unknown; NOT yet known if <=394 | will not start more variants, none fit in 90 min
