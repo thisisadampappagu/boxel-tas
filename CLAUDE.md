@@ -79,3 +79,16 @@ the wall at x≈10655 (y 4000→4400) and finish 3100+. A run that reaches y>430
 on track. Gains elsewhere require re-searching everything after them (chaotic physics), so the cheapest wins are
 in steps 6–7.
 Useful seed points if you want to work earlier: `runs/mcy7_partial_2700/2750.json`, `runs/mcy4_partial_2150.json`.
+
+## Mountain Climb: the beginning (frames 0–1200)
+- Old route frames 0–680 is in `runs/mcb_p4.json` (it wastes ~40 frames at the very start going left).
+- The wedge: the old run (states `runs/st_mcb3.json`) comes to rest wedged in the corner at (1880.5, 1268.5) at
+  frame 961. `runs/wedge_769.json` reaches that state at frame 769 (seed from mcb_p4 at 680, `fol=1 st=../runs/st_mcb3.json
+  folo=0 fw=1 fth=30 fahead=300 rejoin=961 rtp=1 rtv=0.2 rta=0.02 rtw=0.02 K=1000`). Replaying old inputs after it
+  only holds ~14 frames, so everything after must be re-searched.
+- `runs/escape_800.json` (frame 800) is a different, also-fast escape (reached the plank above the bounce pad at ~820).
+- From escape_800, a K=1500 map-heuristic beam (`maps=../maps/mcb3_p phase=0 vis=1 jrb=20 hs=2`) got through the
+  second bounce-pad launch: `runs/mcy1_partial_1200.json` at frame 1200 is ~193 frames ahead of the old run
+  (it is at the state the old run had at frame ~1393). Narrow beams (K≤600) always lost the lead at that launch (~1200).
+- Lead measure: for a state at time t, find the nearest point of the old run's trajectory (`st_mcb3` x,y) → frame k;
+  lead = k − t. Current chain: lead ≈190 at 1200, ≈196 at 2130, ≈202 at 2780.
