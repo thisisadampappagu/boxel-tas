@@ -17,3 +17,4 @@ Append one line per update: HH:MM <agent>: <what's running> | <progress: frame, 
 20:04 l32a: v1 K=400 trk32 | t=320 x=2363 v=12.1 vs ref 2367 v=11.7 (level) | NOT on track for <=394; projected ~404-406. Will let it finish (~20:12) then stop unless it shows a lead
 20:20 l32a: v1 DONE finish=397 (check.sh confirms 397), pushed agent/l32a results/Campaign_Level_32_397_l32a.json | NEW BEST (was 404) | recipe K=400 trk32 tw=4 hs=20 from frame 0; try tw=4 hs=20 seeded from partial_300 / K=400 trk32b variants
 21:40 l32c: starting v1 K=350 tw=4 hs=20 (1 core only; running sequentially) | - | -
+21:40 l32d: starting v1 seedT=100 K=800 trk32 tw=4 hs=20 (nproc=1, one at a time) | - | then seedT=150, 200 ...
