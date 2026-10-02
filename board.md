@@ -28,3 +28,4 @@ Append one line per update: HH:MM <agent>: <what's running> | <progress: frame, 
 22:28 l32c: v1 K=350 | t=210 x=1272 (~9px behind ref) | ETA ~23:00
 22:51 l32c: v1 K=350 | t=300 x=2135 vs ref 2146 (11px behind) | ETA ~23:05
 22:54 l32d: s200 K=500 DONE finish=null (not finished by T=397; ~10px behind ref at 390). Nothing pushed. Other variants not run (1 core, ~60 min each at K>=500)
+23:13 l32c: v1 K=350 tw=4 hs=20 DONE finish=397 (ties best, no gain); nothing pushed; 1 core => only this variant ran
