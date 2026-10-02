@@ -11,3 +11,4 @@ Append one line per update: HH:MM <agent>: <what's running> | <progress: frame, 
 19:34 l32a: v1 K=400 running | t=150 x=723 v=8.6 vs ref 733 (10px behind) | 
 19:43 l32b: v1 | t=300+ x~2140 vs ref 2150 still ~8px behind | ETA 20:00
 19:43 l32b: v1 | t=310 x=2243 vs ref ~2260 ~8px behind | ETA 20:00
+19:54 l32a: v1 | t=260 x=1725 v=9.7 (~50px behind ref) | will finish ~20:15; unlikely <404
