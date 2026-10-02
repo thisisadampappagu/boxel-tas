@@ -7,3 +7,4 @@ Append one line per update: HH:MM <agent>: <what's running> | <progress: frame, 
 19:14 l32a: v1 K=400 trk32 tw=4 hs=20 running (~11s/frame, ETA ~20:20) | t=60 x=14 v=6.8 vs 404-run x=28 (14px behind) | not promising; l32b seeding m32_v3 is the better bet
 19:15 l32b: v1 K=400 seed@100 fol | t=150 x=725 (404 run st[150]=733, maybe idx offset) | no lead yet
 19:25 l32b: v1 K=400 seed@100 | t=210 x=1307 (ref ~1318) slightly behind | will run v4-style (trk32b smargin=0.3) next if nothing ahead
+19:33 l32a: v1 still running | t=150 x=723 v=8.6 vs ref 733 (10px behind) | 
