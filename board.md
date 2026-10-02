@@ -23,3 +23,4 @@ Append one line per update: HH:MM <agent>: <what's running> | <progress: frame, 
 22:24 l39c: v4 (seed480 K=2000) worse (x=-593 @670 vs v1 -358), killed. Started v5: seed=l39c_v1_partial_550 hx=30 hs=5 jrb=20 K=3000 T=718 | pending
 22:29 l39d: v2 DONE finish=722 pushed (agent/l39d, partials/l39d_722_finish.json) | started v3 seed=722 run @540 hx=20 hs=5 jrb=25 K=1500 T=724 | gains come from spike pushes at t~640-700
 22:38 l39c: v5 (seed v1@590 hx=30 K=3000) also 718. Started v6 seed v5@640 hx=40 hs=3 jrb=20 K=3000 T=730 | spike pushes give vx 6-6.5 near x=-430..-300
+22:46 l39d: v3 (seed722@540 hx=20 K=1500) FAILED, no finish by 724 (x=-341 @720) | STOPPING; best mine 722 on agent/l39d; l39c's 718 is best | idea: more K at t=640-700 spike section
