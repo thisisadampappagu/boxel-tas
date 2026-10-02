@@ -1,0 +1,6 @@
+// node satgap.js LEVELPATH tokens.json maxSteps -> smallest SAT gaps between player and spike sensors
+const fs=require('fs');process.env.LEVEL=process.argv[2];const {Game,runTAS}=require('./sim2.js');
+function polySep(A,B){let best=-1e9;for(const P of [A,B])for(let i=0;i<P.length;i++){const a=P[i],b=P[(i+1)%P.length];let nx=b.y-a.y,ny=a.x-b.x;const L=Math.hypot(nx,ny);nx/=L;ny/=L;let a0=1e9,a1=-1e9,b0=1e9,b1=-1e9;for(const v of A){const d=v.x*nx+v.y*ny;a0=Math.min(a0,d);a1=Math.max(a1,d)}for(const v of B){const d=v.x*nx+v.y*ny;b0=Math.min(b0,d);b1=Math.max(b1,d)}best=Math.max(best,Math.max(b0-a1,a0-b1))}return best}
+const g=new Game(JSON.parse(fs.readFileSync(process.env.LEVEL)));const sens=[];for(const c of g.children)if(c.body&&c.body.class=='spike')for(const q of c.body.parts)if(q.isSensor&&q!==c.body)sens.push(q);
+const w=[];const r=runTAS(g,JSON.parse(fs.readFileSync(process.argv[3])),+process.argv[4],(t,gg)=>{const pv=gg.player.body.parts.length>1?gg.player.body.parts[1].vertices:gg.player.body.vertices;let m=1e9;for(const q of sens){const bb=q.bounds,pb=gg.player.body.bounds;if(bb.min.x>pb.max.x+30||pb.min.x>bb.max.x+30||bb.min.y>pb.max.y+30||pb.min.y>bb.max.y+30)continue;m=Math.min(m,polySep(pv,q.vertices))}w.push([m,t])});
+w.sort((a,b)=>a[0]-b[0]);console.log(r.r,r.steps,'closest SAT',w.slice(0,12).map(x=>x[1]+':'+x[0].toFixed(2)).join(' '));
