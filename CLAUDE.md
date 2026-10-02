@@ -42,7 +42,7 @@ Angles: 0 = right, 90 = up, negative = down-right.
 - Results vary a lot between parameter choices. Run several variants (tw 2–8, hs 3–30, K 500–1500) rather than one.
 
 ## Targets
-- Mountain Climb: best 3051 frames. Goal < 3000 (50 s).
+- Mountain Climb: best 3035 frames (`runs/mc_best_3035.json`, states `runs/st_mc_best2.json`). Goal < 3000 (50 s).
 - Campaign Level 32: best 404. World record 395 (6.580 s). Goal ≤ 394.
 - Campaign Level 39: best 781 (`runs/level39_best_tokens.txt`, token format). World record 698.
 
@@ -92,3 +92,10 @@ Useful seed points if you want to work earlier: `runs/mcy7_partial_2700/2750.jso
   (it is at the state the old run had at frame ~1393). Narrow beams (K≤600) always lost the lead at that launch (~1200).
 - Lead measure: for a state at time t, find the nearest point of the old run's trajectory (`st_mcb3` x,y) → frame k;
   lead = k − t. Current chain: lead ≈190 at 1200, ≈196 at 2130, ≈202 at 2780.
+
+## Round 1 results (agents)
+- a3: re-searching the last 51 frames from `runs/mch2_partial_3000.json` (seedT=3000) with K=800 tw=4 hs=20 and the
+  wide angle set `-60,-50,-40,-30,-25,-15,-10,0,10,20,30,40,60,70,80,90,100,110,120,140,160,180,195,210` → **3035**
+  (`runs/mc_best_3035.json`; frames 0–3000 identical to mch2). tw=4 hs=12 gave 3047.
+- a5: wedge reached at frame **756** (`runs/wedge_756.json`, was 769).
+- The opening (frames 0–120) can be ~60 frames faster than the old route: `fol=1 st=../runs/st_mcb3.json folo=0 fw=2 fth=30 fahead=300 K=800` from frame 0 had lead=61 by frame 120.
