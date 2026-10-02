@@ -25,3 +25,4 @@ Append one line per update: HH:MM <agent>: <what's running> | <progress: frame, 
 22:00 l32c: v1 K=350 tw=4 hs=20 | t=100 x=306 vs 397-run 314 (slightly behind) | ~14s/frame, ETA ~22:55-23:20; will report DONE
 22:01 l32d: s200 K=500 | t=250 x=1631 vs ref 1639 (8px behind) | ~21s/frame, ETA ~22:55
 22:18 l32d: s200 K=500 | t=300 x=2146 v=11.4 vs ref 2146.5 v=11.07 (level, slightly faster) | ETA ~22:50
+22:28 l32c: v1 K=350 | t=210 x=1272 (~9px behind ref) | ETA ~23:00
