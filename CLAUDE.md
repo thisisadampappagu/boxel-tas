@@ -99,3 +99,21 @@ Useful seed points if you want to work earlier: `runs/mcy7_partial_2700/2750.jso
   (`runs/mc_best_3035.json`; frames 0–3000 identical to mch2). tw=4 hs=12 gave 3047.
 - a5: wedge reached at frame **756** (`runs/wedge_756.json`, was 769).
 - The opening (frames 0–120) can be ~60 frames faster than the old route: `fol=1 st=../runs/st_mcb3.json folo=0 fw=2 fth=30 fahead=300 K=800` from frame 0 had lead=61 by frame 120.
+
+## Campaign Level 32 (grapple level, straight corridor)
+- Best 404 frames: `runs/m32_v3.json` (states `runs/st_l32.json`). World record 395 → goal ≤ 394.
+- Recipe that made 404: `LEVEL="../levels/Campaign Level 32.json" node mcbeam.js K=500 T=420 log=10 track=../tracks/trk32.json tw=4 hs=20 jrb=10 bx=2 bv=0.25 akey=15 cap=60 smargin=1 psave=25 maps=../maps/s32_p phase=0 vis=1 visfrom=12 angles=<WIDE>`.
+  tw=4 hs=12 gave 412. `trk32b.json` is the 404 run's own path.
+- Speed sits at 8–11 px/f. The grapple "kick" (L33) needs a surface 50–100 px ahead; L32's corridor has none near
+  the path (ceiling ~150 px up, floor spikes far below), so kicks gave <1 px/f in tests. Ceiling-riding was slower.
+- Untried ideas: state-following the 404 run with skip-ahead (`fol=1 st=../runs/st_l32.json folo=0 fw=2..4 fth=30 fahead=60`),
+  bigger K (1000–1500), riding near the spike crosses and grappling them for kicks (smargin=0.5), hx reward.
+
+## Campaign Level 39 (control/jump level)
+- Best 781 frames, tokens in `runs/level39_best_tokens.txt`; per-frame states `runs/st_l39.json`. World record 698 → goal ≤ 697.
+- Route: start bottom-right → up the ramp → left along the middle floor (bounce pads in the floor help) → up the
+  left wall over angled spike blocks → right along the top floor over bouncers → finish cube at (-160,1144).
+- Maps: `maps=../maps/s39c_p` (phases: leftlow, corr, finish; start phase=0). Track: `../tracks/trk39.json`.
+- Round-0 notes: track/map beams lost time vs the 781 run (≈80 frames behind by frame 330). `fol=1 st=../runs/st_l39.json
+  folo=0 fw=2 fth=30 fahead=150 K=800` gained ~10 frames by frame 230 then lost them climbing the left wall (frames 375–475).
+  There are loops in the 781 run around frames 625–675 and 725–775 (dips then back up) that should be skippable.
