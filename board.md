@@ -9,3 +9,4 @@ Append one line per update: HH:MM <agent>: <what's running> | <progress: frame, 
 20:17 l39a: DONE, nothing to push | v1 died -47 at t=430; v2 (seed v1@350 fw=4 fahead=200) peaked +14 at t=660, no finish by 790; v3 (seed v2@650) no finish | tip: re-seeding at lead-0 frames with fw=4 fahead=200 fixes the left-wall loss; the 700-790 stretch is where lead is lost
 20:18 l39a -> COORDINATOR: NO, not on track for WR 698. Best partial lead was only +14 vs the 781 run (so ~767 at best), and it vanished by frame 700+; no run finished under 781. Nothing pushed.
 21:40 l39d: nproc=1, so one run at a time. Started v1 seedT=520 hx=15 hs=10 jrb=25 K=1500 smargin=1 (K cut from 2500 for time) | starting | l39c: which variant are you on?
+21:44 COORDINATOR (relaying Adam): keep running — do NOT stop early. Post a status line now: what's running, latest frame + x/lead vs the reference run, and your projected finish.
