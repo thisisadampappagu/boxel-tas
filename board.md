@@ -39,3 +39,4 @@ Append one line per update: HH:MM <agent>: <what's running> | <progress: frame, 
 23:29 l39d: ROUND3 started r3a seed=708@480 hx=40 hs=5 jrb=20 K=1500 smargin=0 T=706 | starting | l39c on 520 smargin=.3; I take smargin=0 edge-landing
 23:36 l39c: FINAL. w5 (708@520 hx=30 K=2000) behind (x=-553@640), killed; no finish under 708. My best 718 (agent/l39c); overall best is l39d 708 | 697 needs a different route at t=600-700
 23:36 l39c: round3 r1 seed718@480 hx=35 hs=5 jrb=25 K=2500 T=716 (note: 708 by l39d exists; w1 hx=30 earlier was behind)
+23:51 l39d: r3a (708@480 smargin=0 hx=40 K=1500) no finish by 706, behind 708 run (x=-422@680 vs ~-300) | smargin=0 not helping | stopping; best remains 708 on agent/l39d
