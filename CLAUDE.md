@@ -43,7 +43,7 @@ Angles: 0 = right, 90 = up, negative = down-right.
 
 ## Targets
 - Mountain Climb: best 3035 frames (`runs/mc_best_3035.json`, states `runs/st_mc_best2.json`). Goal < 3000 (50 s).
-- Campaign Level 32: best 404. World record 395 (6.580 s). Goal ≤ 394.
+- Campaign Level 32: best 397 (`runs/l32_397.json`, states `runs/st_l32_397.json`; K=400 trk32 tw=4 hs=20 vis=1 visfrom=12 from frame 0). World record 395 (6.580 s) — in-game 397 shows 0.004 s slow, so 396 beats it.
 - Campaign Level 39: best 781 (`runs/level39_best_tokens.txt`, token format). World record 698.
 
 ## Example (Mountain Climb ending)
