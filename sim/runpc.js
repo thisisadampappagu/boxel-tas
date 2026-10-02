@@ -32,6 +32,9 @@ function jobs(lv) {
       J.push(`seed=../runs/l32_397.json seedT=${S} tkeep=1 K=${K} track=../tracks/trk32.json tw=4 hs=20 vis=1 visfrom=12`);
     for (const K of [400, 800]) for (const hs of [20, 26]) J.push(`K=${K} track=../tracks/trk32b.json tw=4 hs=${hs} vis=1 visfrom=12`);
   } else if (lv === 'l39') {
+    // ending: use the moving spikes' back edges for speed (seeded from the 781 run)
+    for (const S of [520, 500, 540, 480]) for (const [hx, jrb] of [[20, 20], [10, 30], [30, 10]]) for (const K of [1500, 3000])
+      J.push(`seed=../runs/l39_781.json seedT=${S} phase=2 hx=${hx} hs=5 jrb=${jrb} K=${K}`);
     // follow the 781 run's states and skip its loops (bigger fahead = bigger skips)
     for (const K of [1500, 1000, 2500]) for (const fw of [4, 3, 5]) for (const fa of [200, 150, 300])
       J.push(`phase=2 fol=1 st=../runs/st_l39.json folo=0 fth=30 rwv=4 rwa=5 rww=30 jrb=0 K=${K} fw=${fw} fahead=${fa}`);

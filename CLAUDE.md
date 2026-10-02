@@ -117,3 +117,15 @@ Useful seed points if you want to work earlier: `runs/mcy7_partial_2700/2750.jso
 - Round-0 notes: track/map beams lost time vs the 781 run (≈80 frames behind by frame 330). `fol=1 st=../runs/st_l39.json
   folo=0 fw=2 fth=30 fahead=150 K=800` gained ~10 frames by frame 230 then lost them climbing the left wall (frames 375–475).
   There are loops in the 781 run around frames 625–675 and 725–775 (dips then back up) that should be skippable.
+
+### L39 ending: moving spikes (Adam's tip — the way to beat 698)
+- `runs/l39_781.json` = the 781 run as an acts file (seedable: `seed=../runs/l39_781.json seedT=N`; made by `sim/tok2acts.js`,
+  replays to finish 781 in both mcbeam and check.sh). Acts files must only set `h` when it changes.
+- From ~frame 500 the run crosses the top section x −1030 → −160 (finish at (−160,1144)) at the 4 px/f control-mode cap, and dips
+  down to the floor twice (frames ~625–675 and ~725–775), wasting ~50 frames.
+- Six dynamic spike blocks bounce up and down on the floor bouncers there (x −936, −824, −720 size 16; −480, −376, −272 size 32;
+  y ≈ 896–1036, 7 px/f up). They point DOWN: only the bottom face kills (the sensor is a strip on the spike face). Their top
+  and side faces are solid. Hitting the back edges/corners of a moving spike gives a push that builds speed past 4 px/f,
+  and touching any of them also re-arms the jump (jumpReady), so the cube can stay high instead of dipping to the floor.
+- Search recipe for this: seed at 480–560, `maps=../maps/s39c_p phase=2 hx=10..30 hs=3..10 jrb=10..30 K=1000..3000`
+  (smargin=1 is fine — it only measures to the spike faces). K=300 runs ~1 s/frame on one core.
