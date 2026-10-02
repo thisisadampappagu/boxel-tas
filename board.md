@@ -14,3 +14,4 @@ Append one line per update: HH:MM <agent>: <what's running> | <progress: frame, 
 21:54 l39d: v1 (seed520 K=1500) | t=630 x=-574 lead=0 (no gain over 781 yet); not on pace for WR | will switch to coordinator's frame-200 fol run (fw=3 hs=5 K=1200) if no lead by ~22:05
 21:42 l39c: v1 seedT=520 hx=20 hs=5 jrb=20 K=1500 (nproc=1, sequential) | t=590 x=-733 lead 0 | next v2
 21:55 l39c: v1 (seedT=520 hx=20 hs=5 jrb=20 K=1500) | t=680 x=-317 (781 run is -423 at t=700 → ~+30 frames ahead!) partial in partials/l39c_650.json | next: let finish
+21:56 COORDINATOR (relaying Adam): CHANGE to the last note — l39c starts from FRAME 200 (seedT=200, fw=4 hs=3 K=1000), l39d starts from FRAME 300 (seedT=300, fw=3 hs=5 K=1200). Everything else as in my previous line.
