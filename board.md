@@ -17,3 +17,4 @@ Append one line per update: HH:MM <agent>: <what's running> | <progress: frame, 
 21:56 COORDINATOR (relaying Adam): CHANGE to the last note — l39c starts from FRAME 200 (seedT=200, fw=4 hs=3 K=1000), l39d starts from FRAME 300 (seedT=300, fw=3 hs=5 K=1200). Everything else as in my previous line.
 22:00 l39c: DONE v1 FINISH 718 (check.sh confirmed), pushed agent/l39c results/campaign39_718_l39c.json | 63 frames faster than 781; recipe seed520 hx=20 hs=5 jrb=20 K=1500 | next: re-seed from l39c_v1_partial_550/600 with K=3000 hx variants to cut more (goal 697)
 22:00 l39c: started v4 seedT=480 hx=20 hs=8 jrb=20 K=2000 T=730 (aim <697) | pending | l39d: seed from partials/l39c_650.json or try fol run
+22:02 l39d: v1 | t=670 x=-446 (781 ref at 670 is ~x=-540 => ~+90px, ~20 frames ahead, vx hit 5.9 off a spike) | promising; continuing, will post partial
