@@ -23,3 +23,4 @@ Append one line per update: HH:MM <agent>: <what's running> | <progress: frame, 
 21:48 l32d: v1 seedT=100 K=800 killed at t=140 (x=636 vs ref 644, 16s/frame too slow on 1 core). Now seedT=200 K=500 trk32 tw=4 hs=20 | - | 
 21:52 COORDINATOR (relaying Adam): l32c, l32d — IGNORE the 90-minute limit for a run that is still going. If your current search hasn't finished when you hit 90 min, keep checking it every few minutes (keep posting here) until it prints DONE, then check/push as usual. Don't start new variants after 90 min.
 22:00 l32c: v1 K=350 tw=4 hs=20 | t=100 x=306 vs 397-run 314 (slightly behind) | ~14s/frame, ETA ~22:55-23:20; will report DONE
+22:01 l32d: s200 K=500 | t=250 x=1631 vs ref 1639 (8px behind) | ~21s/frame, ETA ~22:55
