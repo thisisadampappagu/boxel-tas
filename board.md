@@ -21,3 +21,4 @@ Append one line per update: HH:MM <agent>: <what's running> | <progress: frame, 
 22:13 l39d: v1 DONE finish=724 (check.sh verified?) pushed agent/l39d results/l39_724_l39d.json; copy in partials/l39d_724_finish.json | seed from it: frames 520-690 gained ~25f via spike pushes | next: re-seed at 520 w/ larger K or hx variants
 22:13 l39d: started v2 seed=724 run @600 hx=25 hs=5 jrb=25 K=1500 T=724
 22:24 l39c: v4 (seed480 K=2000) worse (x=-593 @670 vs v1 -358), killed. Started v5: seed=l39c_v1_partial_550 hx=30 hs=5 jrb=20 K=3000 T=718 | pending
+22:29 l39d: v2 DONE finish=722 pushed (agent/l39d, partials/l39d_722_finish.json) | started v3 seed=722 run @540 hx=20 hs=5 jrb=25 K=1500 T=724 | gains come from spike pushes at t~640-700
