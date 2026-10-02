@@ -57,3 +57,25 @@ Angles: 0 = right, 90 = up, negative = down-right.
 Put every finishing action file in `results/<level>_<frames>_<agent>.json`. Confirm it with
 `../check.sh "<level file>" <file>`. Commit it on your own branch (`agent/<name>`) and push.
 Include a one-line note in the commit message with the exact command that produced it.
+
+## Mountain Climb: how the current best (3051) is built
+The level is played in phases; each later phase was re-searched from a state the earlier phase produced.
+1. Frames 0–680: original route up the first slope (`runs/mcb_p4.json` prefix).
+2. ~700–770: instead of jumping around on the small platform, the cube gets WEDGED in the corner between
+   the big slope and the spike block at (1880,1268) — the one resting state in the run — then jumps to the bounce pad.
+3. Big beam (K=1500, map heuristic `maps=../maps/mcb3_p phase=0 vis=1 hs=2 jrb=20`) got through the bounce-pad
+   launch at ~1200 (the place where narrow searches always lost time).
+4. 1200–2150: `track=../tracks/mcb_trk_full.json tkeep=1 tw=4 hs=6 K=1000` (`runs/mcy4_partial_2150.json`).
+5. 2150–2750: `fol=1 st=../runs/st_mcb3.json folo=189 fw=2 fth=30 fahead=200` (state-following of the old run,
+   189 frames ahead of it) → `runs/mcy7_partial_2750.json`.
+6. Grapple entry: from 2750, `goalmode=grapple pruneg=6` (enter grapple block while moving up faster than 6 px/f;
+   entering with no upward speed costs ~100 frames later) → entry at 2869 (`runs/mcg_e46.json`).
+7. Ending 2869→3051: `track=../tracks/mcb_trk_full.json tkeep=1 tw=8 hs=5 vis=1 K=500` + angles
+   (`runs/mch2.json`). The swing reaches 20+ px/f, climbs the wall at x≈10660 at ~20 px/f, flies over the top
+   and grapple-kicks to 70 px/f into the finish (it grapples the finish cube itself on frame 3049).
+   Partials: `runs/mch2_partial_2900/2950/3000.json`; per-frame states: `runs/st_mc_best.json`.
+Key facts: the ending is very sensitive — reruns with slightly different params often get stuck slowly climbing
+the wall at x≈10655 (y 4000→4400) and finish 3100+. A run that reaches y>4300 at x≈10670 before frame ~3000 is
+on track. Gains elsewhere require re-searching everything after them (chaotic physics), so the cheapest wins are
+in steps 6–7.
+Useful seed points if you want to work earlier: `runs/mcy7_partial_2700/2750.json`, `runs/mcy4_partial_2150.json`.
