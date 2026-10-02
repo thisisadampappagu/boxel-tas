@@ -32,3 +32,4 @@ Append one line per update: HH:MM <agent>: <what's running> | <progress: frame, 
 23:13 l39c: w1 (seed718@480 hx=30) failed: x=-604@660, behind. Started w2 seed718@600 hx=25 hs=5 jrb=30 K=3000 T=718 | pending
 23:17 l39d: e1 DONE finish=708 (check.sh verified) pushed agent/l39d results/l39_708_l39d.json, partials/l39d_708_finish.json | 10 faster than 718; vx 10 at t=680 x=-299 | next: reseed @600 K=3000 hx=30
 23:17 l39d: started e2 seed=e1_partial_650 @640 hx=40 hs=5 jrb=25 K=3000 T=708 | starting | none
+23:22 l39c: w2 (seed718@600 K=3000 hx=25 jrb=30) DONE 718 again (no gain). Started w3 seed718@440 hx=20 hs=5 jrb=20 K=2000 vis=1 visfrom=5 T=716
