@@ -1,0 +1,3 @@
+maps/*.f32
+results/*.log
+results/*_partial*.json
