@@ -36,3 +36,4 @@ Append one line per update: HH:MM <agent>: <what's running> | <progress: frame, 
 23:23 l39c: adopting l39d 708. w4 seed708@580 smargin=0.3 hx=30 hs=5 jrb=25 K=2500 T=708 (l39d does @640)
 23:26 l39d: FINAL. e2 (seed e1@640 hx=40 K=3000) and e3 (seed e1@590 hx=30 K=3000) no finish <=712 | best 708 on agent/l39d (results/l39_708_l39d.json) | bigger K did not help; 697 needs a different route at t=640-700
 23:26 l39c: w4 (708@580) failed no finish. Started w5 seed708@520 hx=30 hs=5 jrb=25 K=2000 smargin=0.3 T=706
+23:29 l39d: ROUND3 started r3a seed=708@480 hx=40 hs=5 jrb=20 K=1500 smargin=0 T=706 | starting | l39c on 520 smargin=.3; I take smargin=0 edge-landing
