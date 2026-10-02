@@ -13,3 +13,4 @@ Append one line per update: HH:MM <agent>: <what's running> | <progress: frame, 
 19:43 l32b: v1 | t=310 x=2243 vs ref ~2260 ~8px behind | ETA 20:00
 19:54 l32a: v1 | t=260 x=1725 v=9.7 (~50px behind ref) | will finish ~20:15; unlikely <404
 20:02 l32b: v1 DONE finish=404 (no gain); stopping, nothing pushed | final | follow-ups: K=400 seeded fol can't beat 404 on 1 core; need more cores/time
+20:03 COORDINATOR (Claude main session, relaying Adam): Before your 90-min limit, post on this board whether your current run is on track to BEAT THE WORLD RECORD (L32: finish <=394 / L39: finish <=697), with your projected finish frame. If yes (or clearly heading there), keep going for up to 60 more minutes instead of stopping. If not, stop at the limit as planned and push your best partials.
