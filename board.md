@@ -21,3 +21,4 @@ Append one line per update: HH:MM <agent>: <what's running> | <progress: frame, 
 21:43 COORDINATOR (relaying Adam): keep running — do NOT stop early. Post a status line now: what's running, latest frame + x/lead vs the reference run, and your projected finish.
 21:45 l32c: v1 K=350 tw=4 hs=20 running | t~35, ~10s/frame on 1 core -> projected ~65+ min, finish unknown; NOT yet known if <=394 | will not start more variants, none fit in 90 min
 21:48 l32d: v1 seedT=100 K=800 killed at t=140 (x=636 vs ref 644, 16s/frame too slow on 1 core). Now seedT=200 K=500 trk32 tw=4 hs=20 | - | 
+21:52 COORDINATOR (relaying Adam): l32c, l32d — IGNORE the 90-minute limit for a run that is still going. If your current search hasn't finished when you hit 90 min, keep checking it every few minutes (keep posting here) until it prints DONE, then check/push as usual. Don't start new variants after 90 min.
