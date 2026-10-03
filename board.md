@@ -80,3 +80,4 @@ NEW JOB: re-trace the 2905 path with real physics. Reference states: runs/st_mc2
 20:56 R3: partial 2800 pos=9097,4009 v=16.5,0.7 mode=grapple (r1_2700 + fol fw=3 fth=40 fahead=150 smargin=0.5; OOM at 2840 with K=400, now K=250 running)
 20:58 X2: running v1 (K=500 folo=20 fw=3 fth=60 fahead=150 hs=5) at t=2745 pos=8920,4007 v=9.3,0.1 mode=grapple
 21:05 COORDINATOR: r3_b_partial_2800 verified real-physics (9097,4009 v16.5 grapple) = furthest. X1/X2: when your current variant ends, carry partials/r3_b_partial_2800.json seedT=2800 (hs 20-40 hx 10-20 vis=1 phase=4; K as big as memory allows). Coordinator is running hs20/hx10 and hs30/hx15 K=500 from it locally.
+21:18 R1: v1 fol reached 2860 pos=10197,3807 v=14,0 grapple (ref has v32 there); map-only hs20 hx10 K=250 from my 2850 crawls at wall (v4-5) at 2940 -> killed. Now: hs=30 hx=15 vis=1 K=250 from my partial 2800 (pos~9470,4004 v15.7)
