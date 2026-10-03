@@ -1,0 +1,9 @@
+phase offsets 15049 9894 6081 5226 0
+seeded to 2900 pos 10886 4357 phase 4
+t=2910 n=500 buckets=1230 bestD=626 pos=(10755,4834) v=(-13.6,43.6) mode=control phase=4 lead=0 14s
+t=2920 n=500 buckets=1110 bestD=1129 pos=(10741,4539) v=(-7.3,6.4) mode=control phase=4 lead=0 38s
+t=2930 n=500 buckets=864 bestD=1199 pos=(10795,4509) v=(-4.0,6.7) mode=control phase=4 lead=0 59s
+t=2940 n=500 buckets=1057 bestD=1199 pos=(10763,4525) v=(-4.6,4.3) mode=control phase=4 lead=0 79s
+t=2950 n=419 buckets=1171 bestD=1159 pos=(10735,4550) v=(-6.0,6.1) mode=control phase=4 lead=0 100s
+t=2960 n=500 buckets=1124 bestD=1148 pos=(10779,4595) v=(4.0,-3.9) mode=control phase=4 lead=0 123s
+t=2970 n=500 buckets=1016 bestD=1170 pos=(10805,4574) v=(4.0,6.4) mode=control phase=4 lead=0 144s

@@ -1,0 +1,28 @@
+phase offsets 15049 9894 6081 5226 0
+seeded to 2743 pos 8686 4045 phase 4
+t=2750 n=243 buckets=1147 bestD=4456 pos=(8707,4052) v=(4.5,0.1) mode=grapple phase=4 lead=0 22s
+t=2760 n=485 buckets=3975 bestD=4384 pos=(8746,4027) v=(3.6,-4.1) mode=grapple phase=4 lead=0 157s
+t=2770 n=500 buckets=3971 bestD=4159 pos=(8814,4002) v=(10.6,0.5) mode=grapple phase=4 lead=0 356s
+t=2780 n=500 buckets=4106 bestD=3964 pos=(8942,4020) v=(14.3,3.5) mode=grapple phase=4 lead=0 561s
+t=2790 n=500 buckets=3611 bestD=3853 pos=(9085,4022) v=(14.5,-0.3) mode=grapple phase=4 lead=0 782s
+t=2800 n=500 buckets=3423 bestD=3642 pos=(9175,3991) v=(20.5,-2.2) mode=grapple phase=4 lead=0 990s
+t=2810 n=500 buckets=5074 bestD=3379 pos=(9333,3880) v=(16.5,-11.2) mode=grapple phase=4 lead=0 1195s
+t=2820 n=500 buckets=3966 bestD=3163 pos=(9540,3834) v=(16.5,-11.4) mode=grapple phase=4 lead=0 1398s
+t=2830 n=500 buckets=3747 bestD=2983 pos=(9732,3809) v=(16.0,-10.6) mode=grapple phase=4 lead=0 1598s
+t=2840 n=500 buckets=5360 bestD=2784 pos=(9935,3807) v=(19.1,-0.8) mode=grapple phase=4 lead=0 1810s
+t=2850 n=500 buckets=5977 bestD=2603 pos=(10124,3806) v=(18.7,-2.0) mode=grapple phase=4 lead=0 2031s
+t=2860 n=500 buckets=4671 bestD=2258 pos=(10338,3781) v=(24.6,-7.0) mode=grapple phase=4 lead=0 2243s
+t=2870 n=500 buckets=5561 bestD=2136 pos=(10496,3891) v=(21.1,4.3) mode=grapple phase=4 lead=0 2443s
+t=2880 n=500 buckets=8254 bestD=2139 pos=(10628,3961) v=(14.6,4.6) mode=grapple phase=4 lead=0 2674s
+t=2890 n=500 buckets=9806 bestD=2228 pos=(10775,4063) v=(4.3,14.0) mode=grapple phase=4 lead=0 2946s
+t=2900 n=500 buckets=9110 bestD=550 pos=(10886,4357) v=(2.4,60.8) mode=grapple phase=4 lead=0 3196s
+t=2910 n=500 buckets=1729 bestD=543 pos=(10868,4917) v=(-0.8,55.1) mode=jump phase=4 lead=0 3260s
+t=2920 n=500 buckets=1721 bestD=1508 pos=(10716,5102) v=(-7.0,35.5) mode=control phase=4 lead=0 3291s
+t=2930 n=500 buckets=5120 bestD=1717 pos=(10606,4529) v=(12.0,-0.0) mode=control phase=4 lead=0 3355s
+t=2940 n=500 buckets=3580 bestD=1489 pos=(10725,4525) v=(11.9,-1.7) mode=control phase=4 lead=0 3444s
+t=2950 n=500 buckets=1616 bestD=1496 pos=(10767,4584) v=(4.0,6.2) mode=control phase=4 lead=0 3476s
+t=2960 n=500 buckets=1235 bestD=1470 pos=(10807,4636) v=(4.0,5.6) mode=control phase=4 lead=0 3503s
+t=2970 n=500 buckets=1104 bestD=1468 pos=(10846,4681) v=(4.0,2.8) mode=control phase=4 lead=0 3534s
+t=2980 n=500 buckets=1043 bestD=1443 pos=(10882,4689) v=(4.0,0.0) mode=control phase=4 lead=0 3556s
+t=2990 n=500 buckets=1318 bestD=1375 pos=(10926,4679) v=(4.0,-2.8) mode=control phase=4 lead=0 3581s
+DONE finish= null

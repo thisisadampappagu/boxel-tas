@@ -1,0 +1,8 @@
+phase offsets 15049 9894 6081 5226 0
+seeded to 2850 pos 10124 3806 phase 4
+t=2860 n=171 buckets=1556 bestD=5742 pos=(10304,3806) v=(18.5,-1.2) mode=grapple phase=4 lead=0 53s
+t=2870 n=500 buckets=4456 bestD=5410 pos=(10474,3813) v=(15.5,3.1) mode=grapple phase=4 lead=0 192s
+t=2880 n=500 buckets=7205 bestD=5189 pos=(10554,3900) v=(-1.1,9.8) mode=grapple phase=4 lead=0 414s
+t=2890 n=500 buckets=6983 bestD=4968 pos=(10561,3986) v=(1.1,10.1) mode=grapple phase=4 lead=0 651s
+t=2900 n=500 buckets=6963 bestD=4856 pos=(10625,4011) v=(4.6,2.7) mode=grapple phase=4 lead=0 898s
+t=2910 n=500 buckets=7417 bestD=4784 pos=(10647,4044) v=(0.6,3.5) mode=grapple phase=4 lead=0 1149s
