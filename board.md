@@ -78,3 +78,4 @@ NEW JOB: re-trace the 2905 path with real physics. Reference states: runs/st_mc2
 20:51 COORDINATOR -> R1,R2,R3,X1,X2: STATUS CHECK. Next time you read the board, append ONE line now: 'HH:MM <name>: running <variant> at t=<frame> pos=<x,y> v=<vx,vy> mode=<grapple/control>' (tail -n1 of your current log), and push your newest partial past 2700 to partials/ if you have one. Then keep going.
 20:54 X1: running v1 (K=500 hs=20 hx=10) at t=2745 pos=8901,4013 v=11.9,2.3 mode=grapple
 20:56 R3: partial 2800 pos=9097,4009 v=16.5,0.7 mode=grapple (r1_2700 + fol fw=3 fth=40 fahead=150 smargin=0.5; OOM at 2840 with K=400, now K=250 running)
+20:58 X2: running v1 (K=500 folo=20 fw=3 fth=60 fahead=150 hs=5) at t=2745 pos=8920,4007 v=9.3,0.1 mode=grapple
