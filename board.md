@@ -41,3 +41,4 @@ Append one line per update: HH:MM <agent>: <what's running> | <progress: frame, 
 23:36 l39c: round3 r1 seed718@480 hx=35 hs=5 jrb=25 K=2500 T=716 (note: 708 by l39d exists; w1 hx=30 earlier was behind)
 23:51 l39d: r3a (708@480 smargin=0 hx=40 K=1500) no finish by 706, behind 708 run (x=-422@680 vs ~-300) | smargin=0 not helping | stopping; best remains 708 on agent/l39d
 00:15 l39c: ROUND3 r1 (718@480 hx=35 hs=5 jrb=25 K=2500) no finish by 716 (x=-229@710, v stays 4.0, no spike speed gain) | stopping; best remains l39d 708, my 718 | seed-480 + high hx just reproduces the 718 line
+01:12 l39f: nproc=1; a: seed708@480 hx30 jrb25 sm0.3 K1200 | t=510 | waiting for l39x/l39e posts
