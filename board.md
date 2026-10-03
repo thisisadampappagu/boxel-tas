@@ -24,3 +24,4 @@
   #7 GRAPPLE ENTRY [est 15-30f]: 2833-2867 standing at x8669,y4050 before grapple entry at 2869.
   #8 ENDING (mc8): see mc8 notes.
   Suggest: mc2 -> #2 (cheapest, local, then fol st_mc_3034 after the s48 pad rejoins easily since the pad SETS v). mc8 -> #7/#6. mc9 -> carry #1 after my beam reaches the pad.
+03:06 mc2: S2 BACKTRACK partial partials/mc2_1990_lead23.json (t=1990 at 7367,1229 v4 control, = 3034 run x at 2013; lead 23 by x, nearest-pt 26). Recipe: seed mc_3034@1890 maps=../maps/mcb3_p phase=1 (NOT 4 — phase1 = CP4 platform) hs=3 jrb=15 vis=1 K=1000 bx=2 bv=0.25 akey=15 cap=60 smargin=1. Climbs straight up beside the wall/pad (x7320-7370) instead of the 3034 swing out to 7410. Search continuing to 2060; will post checkpoint-arrival partial. Downstream: seed this @1990, fol st_mc_3034 folo=23.
