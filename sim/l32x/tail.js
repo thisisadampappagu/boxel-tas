@@ -14,7 +14,7 @@ for(let t=T0;t<=TF;t++){ const nb=[];const seen=new Set();
   beam=[];
   for(const e of nb){ const c=e.c; c.step(); if(c.dead) continue; const b=c.player.body;
     if(c.finished){ console.log('FINISH at step',c.stepNo,JSON.stringify([...e.s.seq,e.o&&{t:c.stepNo,...e.o}])); process.exit(0);} 
-    const rem=TF-c.stepNo; const yy=-b.position.y; const vE=Math.sqrt(Math.max(1,b.velocity.x*b.velocity.x+2*0.2778*(yy-(+process.env.YF||120))*(process.env.EN?1:0)));const est=b.position.x+8+vE*rem-(rem<=4?0.7*Math.max(0,Math.abs(yy-128)-13-rem*2):0); 
+    const rem=TF-c.stepNo; const yy=-b.position.y; const vE=Math.sqrt(Math.max(1,b.velocity.x*b.velocity.x+2*0.2778*(yy-(+process.env.YF||120))*(process.env.EN?1:0)));const est=b.position.x+8+vE*rem-(rem<=(+process.env.YR||4)?(+process.env.YP||0.7)*Math.max(0,Math.abs(yy-128)-13-rem*(+process.env.YS||2)):0); 
     const key=Math.round(b.position.x*2)+':'+Math.round(b.position.y*2)+':'+Math.round(b.velocity.x*4)+':'+Math.round(b.velocity.y*4)+':'+anc(c.player);
     if(seen.has(key))continue;seen.add(key);
     beam.push({g:c,seq:e.o?[...e.s.seq,{t:c.stepNo,...e.o}]:e.s.seq,est,x:b.position.x,vx:b.velocity.x,y:-b.position.y});}
