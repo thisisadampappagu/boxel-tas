@@ -50,7 +50,30 @@ function heurFol(g) { const t = g.stepNo; let o = g.folO; const k0 = t + o; let 
   const TH = +(args.fth || 25);
   for (let k = Math.max(1, k0 - 3); k <= Math.min(FOL.length, k0 + FAHEAD); k++) { const d = folDiff(g, FOL[k - 1]); if (k > k0 && d > TH) continue; const c = d - FW * (k - t); if (c < best) { best = c; bk = k; } }
   g.folO = bk - t; return best - (args.hs ? +args.hs * Math.hypot(g.player.body.velocity.x, g.player.body.velocity.y) : 0); }
+const XPROG = args.xprog ? +args.xprog : 0, XMAP = +(args.xmap || 1e9), XVC = +(args.xvc || 12), XYW = +(args.xyw || 0), XY0 = +(args.xy0 || 0);
+function heurX(g) { const b = g.player.body, x = b.position.x, y = -b.position.y; // x-progress heuristic (L39 spike/bounce section)
+  return 1e4 - x - XPROG * Math.min(b.velocity.x, XVC) - (g.player.jumpReady ? JRB : 0) + XYW * Math.abs(y - XY0); }
+const TGT = args.tgt ? args.tgt.split(',').map(Number) : null, XBOOST = +(args.xboost || 5.5);
+function heurTgt(g) { const b = g.player.body, x = b.position.x, y = -b.position.y; let d = 1e9;
+  for (let i = 0; i < TGT.length; i += 2) d = Math.min(d, Math.hypot(x - TGT[i], y - TGT[i + 1])); return 1e5 + d; }
+const AIM = args.aim ? args.aim.split(',').map(Number) : null, AIMOFF = +(args.aimoff || 14.4), AIMTOP = +(args.aimtop || 904), AIMVW = +(args.aimvw || 5);
+function heurAim(g) { // predict ballistic landing at pad-top height; reward hitting the left margin of a pad with vx ~4
+  const b = g.player.body, x = b.position.x, y = -b.position.y, vx = b.velocity.x, vy = -b.velocity.y, G = 0.2778;
+  const h0 = y - 8 - AIMTOP; if (h0 < -1) return 1e5 + 900;
+  const k = (vy + Math.sqrt(Math.max(0, vy * vy + 2 * G * h0))) / G; const xl = x + vx * k;
+  let e = 1e9; for (const p of AIM) e = Math.min(e, Math.abs(xl - (p - AIMOFF)));
+  return 1e5 + e + AIMVW * Math.max(0, 4 - vx); }
+const FIN = args.fin ? args.fin.split(',').map(Number) : null; // fin=X,Y : time-to-target estimate (frames), for the L39 ending
+function heurFin(g) { const b = g.player.body, x = b.position.x, y = -b.position.y, vx = b.velocity.x; const dx = FIN[0] - x, dy = FIN[1] - y;
+  const vxe = Math.max(+(args.fvmin || 3), Math.min(vx, 10));
+  return Math.max(dx / vxe, Math.abs(dy) / +(args.fvy || 6)) + +(args.fyw || 0.02) * Math.abs(dy) - (g.player.jumpReady ? +(args.fjr || 2) : 0); }
 function heur(g) {
+  if (FIN && (!AIM || g.boosted || g.player.body.velocity.x >= XBOOST)) { if (AIM) g.boosted = 1; return heurFin(g); }
+  if (AIM && g.player.body.velocity.x < XBOOST && !g.boosted) return heurAim(g);
+  if (AIM && !g.boosted) { g.boosted = 1; if (!global.__bst) { global.__bst = 1; const b = g.player.body; console.log('BOOST at', g.stepNo, 'pos', b.position.x.toFixed(1), (-b.position.y).toFixed(1), 'v', b.velocity.x.toFixed(2), (-b.velocity.y).toFixed(2)); } }
+  if (TGT && g.player.body.velocity.x < XBOOST && !g.boosted) return heurTgt(g);
+  if (TGT) g.boosted = 1;
+  if (XPROG) { if (g.player.body.position.x < XMAP) return heurX(g); return -1e5 + heurMap(g); }
   if (FOL) { if (g.stepNo + (g.folO || 0) < FOL.length - 3) return heurFol(g); return -1e5 + heurMap(g); }
   if (RS && RJF !== null) { const k = Math.max(1, Math.min(RJ, RJF + (g.stepNo - RJT))); const r = rjDiff(g, RSALL[k - 1]); const r2 = rjDiff(g); return Math.min(r.dp + RWV * r.dv + RWA * r.da + RWW * r.dw + (r.jr ? 0 : 15), r2.dp + RWV * r2.dv + RWA * r2.da + RWW * r2.dw + (r2.jr ? 0 : 15)); }
   if (RS) { const r = rjDiff(g); return r.dp + RWV * r.dv + RWA * r.da + RWW * r.dw + (r.jr ? 0 : 15); }
@@ -84,6 +107,7 @@ function heurMap(g) {
   if (args.smallw && g.player.scale.x > 16 && g.stepNo > 60) h += +args.smallw;
   if (args.hx && (!args.hxafter || g.stepNo > +args.hxafter)) h -= +args.hx * vx;
   if (args.hs) h -= +args.hs * Math.hypot(vx, vy);
+  if (args.tdiv) return (OFF[k] + h) / Math.max(+(args.tdiv), Math.min(vx, +(args.tdcap || 10)));
   return OFF[k] + h;
 }
 // root
