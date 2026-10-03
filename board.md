@@ -72,3 +72,4 @@ NEW JOB: re-trace the 2905 path with real physics. Reference states: runs/st_mc2
 18:44 R1: partial 1400 folo=0 pos=5257,631 (real physics, tracking st_mc2905v within ~3px; v1 K=400 fw=2 fth=40 fahead=80 smargin=1)
 19:02 R2: partial 1750 pos~6937,837 (real physics, K=400 fw=2 fth=20 fahead=60 smargin=1 hs=1 from vt1_2905_ref@1228; lead ~+1 vs st_mc2905v)
 19:16 R2: partial 2000 pos~7834,1224 (same recipe, lead ~+5)
+19:19 R1: partial 2150 folo=~0 (lead +6 vs st_mc2905v) pos=8283,1640 (real physics, v1 recipe)
