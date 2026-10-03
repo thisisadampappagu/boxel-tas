@@ -50,7 +50,14 @@ function heurFol(g) { const t = g.stepNo; let o = g.folO; const k0 = t + o; let 
   const TH = +(args.fth || 25);
   for (let k = Math.max(1, k0 - 3); k <= Math.min(FOL.length, k0 + FAHEAD); k++) { const d = folDiff(g, FOL[k - 1]); if (k > k0 && d > TH) continue; const c = d - FW * (k - t); if (c < best) { best = c; bk = k; } }
   g.folO = bk - t; return best - (args.hs ? +args.hs * Math.hypot(g.player.body.velocity.x, g.player.body.velocity.y) : 0); }
+const FIN = args.fin ? args.fin.split(',').map(Number) : null; // fin=X,Y : time-to-target estimate (frames)
+function heurFin(g) { const b = g.player.body, x = b.position.x, y = -b.position.y, vx = b.velocity.x; const dx = FIN[0] - x, dy = FIN[1] - y;
+  const vxe = Math.max(+(args.fvmin || 3), Math.min(vx, +(args.fvmax || 10)));
+  if (args.fball) { const vy = -b.velocity.y, G = 0.2778; let tf; if (dy <= 0) tf = (vy + Math.sqrt(Math.max(0, vy * vy - 2 * G * dy))) / G; else tf = dy / +(args.fvy || 6);
+    return Math.max(dx / vxe, tf) - (g.player.jumpReady ? +(args.fjr || 2) : 0); }
+  return Math.max(dx / vxe, Math.abs(dy) / +(args.fvy || 6)) + +(args.fyw || 0.02) * Math.abs(dy) + +(args.fbelow || 0) * Math.max(0, +(args.fymin || -1e9) - y) - (g.player.jumpReady ? +(args.fjr || 2) : 0); }
 function heur(g) {
+  if (FIN) return heurFin(g);
   if (FOL) { if (g.stepNo + (g.folO || 0) < FOL.length - 3) return heurFol(g); return -1e5 + heurMap(g); }
   if (RS && RJF !== null) { const k = Math.max(1, Math.min(RJ, RJF + (g.stepNo - RJT))); const r = rjDiff(g, RSALL[k - 1]); const r2 = rjDiff(g); return Math.min(r.dp + RWV * r.dv + RWA * r.da + RWW * r.dw + (r.jr ? 0 : 15), r2.dp + RWV * r2.dv + RWA * r2.da + RWW * r2.dw + (r2.jr ? 0 : 15)); }
   if (RS) { const r = rjDiff(g); return r.dp + RWV * r.dv + RWA * r.da + RWW * r.dw + (r.jr ? 0 : 15); }
@@ -154,6 +161,7 @@ for (let t = T0 + 1; t <= TMAX && !finish; t++) {
       if (c.finished) { if (!finish) finish = { t, node }; continue; }
       if (args.pruneg && c.player.mode == 'grapple' && !(-c.player.body.velocity.y > +args.pruneg)) continue;
       if (args.goalmode && c.player.mode == args.goalmode && !finish && (!args.goalvy || -c.player.body.velocity.y > +args.goalvy)) { finish = { t, node }; console.log('GOALMODE at', t); }
+      if (args.goalspeed && Math.hypot(c.player.body.velocity.x, c.player.body.velocity.y) > +args.goalspeed && (!args.goalvx || c.player.body.velocity.x > +args.goalvx) && !finish) { finish = { t, node }; console.log('GOALSPEED at', t, c.player.body.position.x.toFixed(1), (-c.player.body.position.y).toFixed(1), c.player.body.velocity.x.toFixed(2), (-c.player.body.velocity.y).toFixed(2)); }
       if (RS) { const r = rjDiff(c); if (r.dp < +(args.rtp || 2) && r.dv < +(args.rtv || 0.3) && r.da < +(args.rta || 0.06) && r.dw < +(args.rtw || 0.02) && r.jr && !finish) { finish = { t, node }; console.log('REJOIN at', t, JSON.stringify(r)); } }
       const h = heur(c);
       const k = key(c), cur = next.get(k);
