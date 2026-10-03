@@ -62,7 +62,7 @@ function heurAim(g) { // predict ballistic landing at pad-top height; reward hit
   const h0 = y - 8 - AIMTOP; if (h0 < -1) return 1e5 + 900;
   const k = (vy + Math.sqrt(Math.max(0, vy * vy + 2 * G * h0))) / G; const xl = x + vx * k;
   let e = 1e9; for (const p of AIM) e = Math.min(e, Math.abs(xl - (p - AIMOFF)));
-  return 1e5 + e + AIMVW * Math.max(0, 4 - vx); }
+  return 1e5 + e + AIMVW * Math.max(0, 4 - vx) + +(args.aimkw || 0) * k; }
 const FIN = args.fin ? args.fin.split(',').map(Number) : null; // fin=X,Y : time-to-target estimate (frames), for the L39 ending
 function heurFin(g) { const b = g.player.body, x = b.position.x, y = -b.position.y, vx = b.velocity.x; const dx = FIN[0] - x, dy = FIN[1] - y;
   const vxe = Math.max(+(args.fvmin || 3), Math.min(vx, 10));

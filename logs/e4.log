@@ -1,0 +1,43 @@
+phase offsets 4276 1174 0
+seeded to 590 pos -687 969 phase 2
+t=592 n=6 buckets=6 bestD=81 pos=(-675,979) v=(6.3,5.0) mode=control phase=2 lead=0 0s
+t=594 n=15 buckets=15 bestD=79 pos=(-662,988) v=(6.3,4.4) mode=control phase=2 lead=0 0s
+t=596 n=30 buckets=30 bestD=77 pos=(-649,996) v=(6.3,3.9) mode=control phase=2 lead=0 0s
+t=598 n=69 buckets=69 bestD=74 pos=(-637,1003) v=(6.3,3.3) mode=control phase=2 lead=0 1s
+t=600 n=138 buckets=147 bestD=72 pos=(-624,1009) v=(6.3,2.8) mode=control phase=2 lead=0 2s
+t=602 n=112 buckets=195 bestD=70 pos=(-612,1014) v=(6.3,2.2) mode=control phase=2 lead=0 3s
+t=604 n=141 buckets=186 bestD=68 pos=(-599,1017) v=(6.3,1.7) mode=control phase=2 lead=0 4s
+t=606 n=198 buckets=279 bestD=66 pos=(-586,1020) v=(6.3,1.1) mode=control phase=2 lead=0 5s
+t=608 n=237 buckets=321 bestD=64 pos=(-574,1021) v=(6.3,0.6) mode=control phase=2 lead=0 7s
+t=610 n=323 buckets=423 bestD=62 pos=(-561,1021) v=(6.3,-0.0) mode=control phase=2 lead=0 9s
+t=612 n=323 buckets=477 bestD=60 pos=(-548,1021) v=(6.3,-0.6) mode=control phase=2 lead=0 12s
+t=614 n=361 buckets=486 bestD=58 pos=(-536,1019) v=(6.3,-1.1) mode=control phase=2 lead=0 15s
+t=616 n=404 buckets=615 bestD=56 pos=(-523,1016) v=(6.3,-1.7) mode=control phase=2 lead=0 19s
+t=618 n=412 buckets=594 bestD=54 pos=(-510,1011) v=(6.3,-2.2) mode=control phase=2 lead=0 22s
+t=620 n=484 buckets=684 bestD=49 pos=(-498,1007) v=(6.3,3.5) mode=control phase=2 lead=0 25s
+t=622 n=485 buckets=756 bestD=47 pos=(-485,1014) v=(6.3,2.9) mode=control phase=2 lead=0 29s
+t=624 n=613 buckets=840 bestD=45 pos=(-473,1022) v=(6.3,2.4) mode=control phase=2 lead=0 33s
+t=626 n=604 buckets=1020 bestD=43 pos=(-460,1028) v=(6.3,1.8) mode=control phase=2 lead=0 39s
+t=628 n=684 buckets=1029 bestD=41 pos=(-448,1032) v=(6.3,1.2) mode=control phase=2 lead=0 44s
+t=630 n=807 buckets=1368 bestD=39 pos=(-435,1034) v=(6.3,0.7) mode=control phase=2 lead=0 50s
+t=632 n=761 buckets=1560 bestD=37 pos=(-423,1035) v=(6.3,0.1) mode=control phase=2 lead=0 58s
+t=634 n=894 buckets=1539 bestD=35 pos=(-410,1034) v=(6.3,-0.4) mode=control phase=2 lead=0 64s
+t=636 n=817 buckets=1473 bestD=32 pos=(-397,1060) v=(6.3,5.8) mode=control phase=2 lead=0 72s
+t=638 n=931 buckets=2748 bestD=30 pos=(-385,1071) v=(6.3,5.3) mode=control phase=2 lead=0 81s
+t=640 n=1112 buckets=2826 bestD=28 pos=(-372,1081) v=(6.3,4.7) mode=control phase=2 lead=0 91s
+t=642 n=1367 buckets=3135 bestD=26 pos=(-360,1089) v=(6.3,4.2) mode=control phase=2 lead=0 103s
+t=644 n=1759 buckets=3561 bestD=24 pos=(-347,1097) v=(6.3,3.6) mode=control phase=2 lead=0 117s
+t=646 n=2000 buckets=4458 bestD=22 pos=(-334,1103) v=(6.3,3.1) mode=control phase=2 lead=0 137s
+t=648 n=2000 buckets=4569 bestD=19 pos=(-322,1109) v=(6.3,2.5) mode=control phase=2 lead=0 158s
+t=650 n=2000 buckets=4641 bestD=17 pos=(-309,1113) v=(6.3,1.9) mode=control phase=2 lead=0 180s
+t=652 n=2000 buckets=4314 bestD=15 pos=(-296,1116) v=(6.3,1.4) mode=control phase=2 lead=0 202s
+t=654 n=1849 buckets=4023 bestD=13 pos=(-284,1118) v=(6.3,0.8) mode=control phase=2 lead=0 222s
+t=656 n=2000 buckets=4002 bestD=11 pos=(-271,1119) v=(6.3,0.3) mode=control phase=2 lead=0 241s
+t=658 n=2000 buckets=4152 bestD=9 pos=(-258,1118) v=(6.3,-0.3) mode=control phase=2 lead=0 261s
+t=660 n=2000 buckets=4128 bestD=7 pos=(-246,1117) v=(6.3,-0.8) mode=control phase=2 lead=0 281s
+t=662 n=1854 buckets=3999 bestD=5 pos=(-233,1114) v=(6.3,-1.4) mode=control phase=2 lead=0 301s
+t=664 n=2000 buckets=3915 bestD=4 pos=(-221,1111) v=(5.8,-1.9) mode=control phase=2 lead=0 319s
+t=666 n=2000 buckets=3825 bestD=4 pos=(-208,1146) v=(6.3,5.6) mode=control phase=2 lead=0 338s
+t=668 n=1950 buckets=3696 bestD=-1 pos=(-196,1139) v=(5.8,0.3) mode=control phase=2 lead=0 357s
+t=670 n=1909 buckets=3750 bestD=-2 pos=(-187,1142) v=(4.0,1.3) mode=control phase=2 lead=0 379s
+DONE finish= 670
