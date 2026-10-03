@@ -137,3 +137,29 @@ Useful seed points if you want to work earlier: `runs/mcy7_partial_2700/2750.jso
   and touching any of them also re-arms the jump (jumpReady), so the cube can stay high instead of dipping to the floor.
 - Search recipe for this: seed at 480–560, `maps=../maps/s39c_p phase=2 hx=10..30 hs=3..10 jrb=10..30 K=1000..3000`
   (smargin=1 is fine — it only measures to the spike faces). K=300 runs ~1 s/frame on one core.
+
+### L39 speed mechanism: BOUNCE PADS (agent l39x, found by diagnosing the 708 run)
+- The 708 speed-up (t 657-659) is not a spike edge: the cube lands on the BOUNCE PAD (-480,896) hitbox top, then slides
+  right into the pad's sensor strip. On sensor contact the bounce code SETS the player's velocity to |v| = pad scale.y/2 = 8,
+  in the direction of the player's motion REFLECTED about the pad normal. Shallow (near-horizontal) motion → vx ≈ 7.3-8;
+  a steep fall straight onto the sensor → mostly vertical (the 708 run wasted pad -824 at t=575: v(4,-8.9) → (2.9,7.5)).
+- Speed above 4 is kept: control mode only accelerates up to 4 (never clamps down), player friction 0, frictionAir 0,
+  a jump only zeroes vy (vx kept). Opposite h decelerates 0.5/f. Hitting spike/wall sides is what loses it.
+- Geometry: small pads (-936,-824,-720): hitbox x pad±8, y 888..904; sensor strip x pad±4.8, y 904..907.2 (big pads: ×2 in x).
+  The cube has to touch the hitbox top in the left margin (outside the sensor) and slide in on the next frame; the
+  workable cube centre is ≈ pad-16.5 at landing for a typical fall (depends on rotation; ~0.9-1.3 rad mod π/2 worked).
+- Tools (sim/): `l39diag.js ACTS from to` per-frame contacts/velocities/spikes; `l39probe*.js` shift a state's x/y/angle
+  and test which landings boost; `l39spk.js ACTS` moving-spike heights (period ≈58 frames; small spikes low at ~498,556,614).
+- New mcbeam options (defaults unchanged):
+  - `aim=P1,P2 aimoff=16.5 aimkw= aimvw=` before boost: ballistic-predict where the cube reaches pad-top height and score
+    |x_land − (pad − aimoff)| (+aimvw·(4−vx) + aimkw·frames-to-land). Boost = vx ≥ `xboost` (use 6.8).
+  - `fin=X,Y [fvmin=3 fvy=6 fyw=0.02 fjr=2]` after boost: frames-to-finish estimate max(dx/vx, |dy|/fvy) + fyw|dy| − fjr·jumpReady.
+    Use `fin=-184,1144`. (The s39c maps treat the moving spikes' START positions as walls, so map heuristics are distorted there.)
+  - `xprog=L [xmap= xvc=]` simple x + L·vx progress heuristic; `tgt=x,y,...` distance-to-point (weak, not recommended); `tdiv=`.
+- Results: 670 = 708 prefix to 498, `aim=-824 aimoff=16.5 xboost=6.8 xprog=15 K=600 bx=1 akey=10` → boost at 566 (vx 7.5)
+  (`results/x7_partial_610.json`), then `fin=-184,1144 K=800` from 563 → 670 (`results/campaign39_670_l39x.json`).
+  K=2000 from 590 also 670. It loses ~10 frames at t 610-620 hitting the top of big spike -480 (the big spikes all land on
+  their pads at ~614) — passing higher/earlier there is the next gain.
+- Not found: an earlier boost from l39e's 673 prefix (pad -824 at ~540 is out of reach at vx≤4; pad -720 landing at ~572
+  after a jump at ~512 should be possible but the aim beam didn't find it). A boost at -824/-720 from the 673 prefix
+  + its higher flight could give ~655.
