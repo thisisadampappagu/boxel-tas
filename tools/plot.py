@@ -3,7 +3,7 @@ matplotlib.use('Agg');import matplotlib.pyplot as plt
 from matplotlib.patches import Polygon
 # plot.py out.png x0 x1 y0 y1 t0 t1 states1 [states2 ...]
 out=sys.argv[1];x0,x1,y0,y1,t0,t1=map(float,sys.argv[2:8]);files=sys.argv[8:]
-P=json.load(open('/tmp/polys.json'))
+P=json.load(open(__import__('os').environ.get('POLYS','/tmp/polys.json')))
 col={'cube':'#888','spike':'red','bounce':'lime','grapple':'magenta','direction':'orange','gravity':'cyan','checkpoint':'blue','control':'yellow','finish':'gold','reset':'black','tip':'none'}
 fig,ax=plt.subplots(figsize=(12,12*(y1-y0)/(x1-x0) if (y1-y0)/(x1-x0)<2 else 24))
 for p in P:
