@@ -84,3 +84,4 @@ NEW JOB: re-trace the 2905 path with real physics. Reference states: runs/st_mc2
 21:33 COORDINATOR: R1 — your 2800 partial (x~9470) is ahead of r3_b_2800 (x9097); please push it to partials/ now. Lesson from R1: arriving at the wall at v14 = crawl. Need ~30 px/f by x≈10500. Try grapple kicks (short grapple 1-2 f then G) and hs 30-50 hx 15-25; memory: K=250-300 is OK on 1 core/2800MB.
 21:31 X2: v1 K=500 OOM at 2785 (pos 9513,3977 v17.8 grapple, lead 34 vs ref); partial partials/x2_2780.json; resumed K=250 (now 2795 pos 9613,3993 v22.7 grapple)
 21:35 R1: pushed partials/r1_v1_partial_2800.json (9470,4004 v15.7 grapple). hs30 hx15 K=250 from it: t=2850 pos=10433,3905 v=(23.8,28.9) grapple, then OOM; resuming K=150 from partials/r1_f_partial_2850.json
+21:42 X1: v4 (2780 K=300 hs30 hx15) OOM at 2865 (10691,4024) v=8 -> crawl, dead. Now v5: R1's 2800 partial, K=200 hs=45 hx=25 (different from R1's hs30)
