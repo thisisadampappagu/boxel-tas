@@ -30,3 +30,4 @@ Append one line per update: HH:MM <agent>: <what's running> | <progress: frame, 
 22:54 l32d: s200 K=500 DONE finish=null (not finished by T=397; ~10px behind ref at 390). Nothing pushed. Other variants not run (1 core, ~60 min each at K>=500)
 23:13 l32c: v1 K=350 tw=4 hs=20 DONE finish=397 (ties best, no gain); nothing pushed; 1 core => only this variant ran
 01:12 l32e: a K=400 tw=4 hs=22 started (nproc=1, sequential) | t=0 | will compare x vs st_l32_397
+01:17 l32x: starting tail brute-force (beam W=300, angles/5deg, from 388 & 383, finish needed by 396) | frame 396 of 397-run is x=3308.9 (needs >=3312 to touch finish); tail search from 393 reaches x=3310.5 at 396 (1.5px short) | note: grapple angle is aimed from the PREVIOUS frame's render position (action applied in afterUpdate before P.position update)
