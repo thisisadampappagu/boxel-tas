@@ -137,3 +137,22 @@ Useful seed points if you want to work earlier: `runs/mcy7_partial_2700/2750.jso
   and touching any of them also re-arms the jump (jumpReady), so the cube can stay high instead of dipping to the floor.
 - Search recipe for this: seed at 480–560, `maps=../maps/s39c_p phase=2 hx=10..30 hs=3..10 jrb=10..30 K=1000..3000`
   (smargin=1 is fine — it only measures to the spike faces). K=300 runs ~1 s/frame on one core.
+
+## Mountain Climb status (round 3, 10-agent push) — best 3034 = 50.57 s, goal < 3000 (sub-50 s)
+- Best: `runs/mc_3034.json` (finish 3034), per-frame states `runs/st_mc_3034.json` ([x,y,vx,vy,ang,w,jr,mode,gx,gy,rope]).
+- Unused checkpoints: `runs/mc_keep_600_lead66.json` (66 frames ahead of the old run at frame 600), `runs/mc_wedge_739.json`.
+- Where the 3034 run is: wedge/bounce-pad launch ~700–1250; checkpoint 7552,1216 ("Unhelpful pull" tip) reached at frame ~2060
+  after the run drifts BACKWARDS from x 7409 (t≈1924) to 7291 (t≈1988) — a ~60-frame loop worth attacking; gravity
+  blocks at x 8488 (y 2048–2672); grapple entry ~2869; finish 12248,4256.
+- Track-progress stalls ≥25 frames: 27–76, 811–849 (x 1739), 1042–1071 (x 2073), 2839–2867 (x 8669), plus the 1916–2000 backtrack.
+- Mechanisms learned on other levels this week (use them here):
+  * Bounce pads SET the speed to |v| = pad scale.y/2 in the reflected direction when you touch the pad's SENSOR strip.
+    A shallow (sideways) entry gives that speed horizontally; a steep fall gives it vertically. MC pads: 1760,1416 s16;
+    2000,1448 s16; 2112,1976 s32; 3200,2264 s48 (=24 px/f!); 3400,2280 s16; 3664,2272 s24; 3944,2272 s32; 6592,808 s16;
+    7344,1064 s16; 8496,2336 s16; 8520,3208 s48. Player has frictionAir 0 and friction 0: speed above the 4 px/f control
+    cap is NOT clamped (only pressing the opposite direction decelerates), and a jump only zeroes vy.
+    Tools: agent/l39x branch → sim/l39diag.js, mcbeam options aim=<padX,...> aimoff= xboost= and fin=<x,y> (documented in its CLAUDE.md).
+  * Grapple mode is entered on the step you touch the grapple block; grappling 1 frame earlier saved a frame on L32.
+  * Energy-aware tail search (score = x + remaining*sqrt(v^2 + 2g*drop)) beat beam search for endings:
+    agent/l32x branch → sim/l32x/tail.js.
+- Chaos: any change at frame X needs everything after X re-searched. Post partials; downstream agents re-search from them.
