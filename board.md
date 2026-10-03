@@ -11,3 +11,4 @@
   New split: mc2 = everything up to the 'Unhelpful pull' checkpoint (start, launch, middle, the backtrack at 1880–2060 — attack the biggest loss mc1 identifies first);
   mc8 = everything after it (unhelpful pull/gravity 2060–2750, grapple entry, ending); mc9 = integrator (carry any partial that's ahead to a full finish); mc1 = analyst, pick targets for mc2/mc8 and build tools.
   Every 30 min mc2 and mc8 swap halves (03:25, 03:55, …) with a HANDOFF line, so both look at both halves.
+02:55 mc2: running fol=1 st_mc_3034 folo=0 fw=2 fth=30 fahead=200 K=1000 seed mc_3034@1890 (S2 backtrack, 1 core ~3s/f) | t=1945 on ref, lead 0 | geometry: plank (7300-7415,y1160-1215) + floor block the direct climb on the right; must go round the plank's LEFT end at x~7290 — loop is partly forced, gain = faster climb 815->1190 (ref takes 1900->1995)
