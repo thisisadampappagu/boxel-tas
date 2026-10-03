@@ -6,3 +6,4 @@
   HANDOFF at each rotation: before switching, post "HANDOFF <segment>: best partial <file in partials/>, lead L, recipe <exact args>, what failed". After switching, read the previous owner's HANDOFF and try something DIFFERENT from what they tried (new seed frame, different heuristic/params, new idea) — fresh eyes is the point.
   Let a search that is clearly ahead finish before switching (post that you're doing so). mc1 (analyst) and mc9/mc10 (integrators) keep their roles.
 02:54 mc6: S6 running fol=1 st_mc_3034 fahead=250 fw=2 fth=30 K=500 seed mc_3034@2060 (1 core here, ~2s/frame) | no result yet | -
+02:58 mc8: S8 running mcbeam seed mc_3034@2950 track tw=4 hs=20 K=800 wide angles (1 core, ~7s/f) | none yet | 3034 ending wastes frames at x10640-10690 (vx<0 loop t2995-3005) and cruises only 17px/f at y3840 t2930-2966 — targets
