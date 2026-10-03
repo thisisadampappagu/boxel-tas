@@ -118,6 +118,14 @@ Useful seed points if you want to work earlier: `runs/mcy7_partial_2700/2750.jso
   folo=0 fw=2 fth=30 fahead=150 K=800` gained ~10 frames by frame 230 then lost them climbing the left wall (frames 375–475).
   There are loops in the 781 run around frames 625–675 and 725–775 (dips then back up) that should be skippable.
 
+### L39 status (best 708, `runs/l39_708.json`, states `runs/st_l39_708.json`)
+- 708 = 781 run's frames 0–480 unchanged, then walking at 4 px/f from x −1110 (t=480) to x −480 (t≈660), then a spike-edge
+  push off the big spikes at x −480/−376 gives 8–10 px/f (t 660–690), finish 708. Found by seed=718 run @480 hx=30 hs=5 jrb=25 K=1500 smargin=0.3.
+- Untapped: (a) the 480→660 stretch is pure 4 px/f walking past the SMALL spikes at x −936, −824, −720 — a push off them
+  could double the speed there (≈40+ frames); (b) frames 380–480 climb the left wall slowly (x≈−1110..−1146, y 540→924).
+- Spikes bounce on their pads with a period of ≈60 frames (up at ~7 px/f around t=440, 500, 560, 620…), so arrival time
+  decides which pushes are possible; waiting a few frames can line one up.
+
 ### L39 ending: moving spikes (Adam's tip — the way to beat 698)
 - `runs/l39_781.json` = the 781 run as an acts file (seedable: `seed=../runs/l39_781.json seedT=N`; made by `sim/tok2acts.js`,
   replays to finish 781 in both mcbeam and check.sh). Acts files must only set `h` when it changes.

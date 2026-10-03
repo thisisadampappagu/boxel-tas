@@ -16,7 +16,7 @@ const WIDE = 'angles=-60,-50,-40,-30,-25,-15,-10,0,10,20,30,40,60,70,80,90,100,1
 const LV = {
   l32: { file: '../levels/Campaign Level 32.json', best: 397, T: 400,
     base: `T=400 log=10 jrb=10 bx=2 bv=0.25 akey=15 cap=60 smargin=1 psave=25 maps=../maps/s32_p phase=0 ${WIDE}` },
-  l39: { file: '../levels/Campaign Level 39.json', best: 781, T: 790,
+  l39: { file: '../levels/Campaign Level 39.json', best: 708, T: 790,
     base: 'T=790 log=10 bx=2 bv=0.25 akey=15 cap=60 smargin=1 psave=25 maps=../maps/s39c_p' },
   mc:  { file: '../levels/Mountain Climb.json', best: 3034, T: 3045,
     base: `T=3045 log=10 track=../tracks/mcb_trk_full.json tkeep=1 jrb=10 bx=2 bv=0.25 akey=15 cap=60 smargin=1 psave=25 maps=../maps/mcb3_p phase=4 vis=1 ${WIDE}` },
@@ -33,8 +33,8 @@ function jobs(lv) {
     for (const K of [400, 800]) for (const hs of [20, 26]) J.push(`K=${K} track=../tracks/trk32b.json tw=4 hs=${hs} vis=1 visfrom=12`);
   } else if (lv === 'l39') {
     // ending: use the moving spikes' back edges for speed (seeded from the 781 run)
-    for (const S of [520, 500, 540, 480]) for (const [hx, jrb] of [[20, 20], [10, 30], [30, 10]]) for (const K of [1500, 3000])
-      J.push(`seed=../runs/l39_781.json seedT=${S} phase=2 hx=${hx} hs=5 jrb=${jrb} K=${K}`);
+    for (const S of [480, 500, 520, 540, 560, 600]) for (const [hx, jrb] of [[30, 25], [20, 20], [40, 30]]) for (const sm of [1, 0.3])
+      J.push(`seed=../runs/l39_708.json seedT=${S} phase=2 hx=${hx} hs=5 jrb=${jrb} K=1500 smargin=${sm}`);
     // follow the 781 run's states and skip its loops (bigger fahead = bigger skips)
     for (const K of [1500, 1000, 2500]) for (const fw of [4, 3, 5]) for (const fa of [200, 150, 300])
       J.push(`phase=2 fol=1 st=../runs/st_l39.json folo=0 fth=30 rwv=4 rwa=5 rww=30 jrb=0 K=${K} fw=${fw} fahead=${fa}`);
