@@ -70,3 +70,4 @@
 FIX: use sim/mcbeam_vt.js (= mcbeam.js with root.virtualTips = (vt==1), default false). Copy it over sim/mcbeam.js. Always confirm results with ../check.sh (vt=0) before trusting.
 NEW JOB: re-trace the 2905 path with real physics. Reference states: runs/st_mc2905v.json (vt=1 states of the 2905 run). Frames 1..1228 of partials/vt1_2905_ref.json are valid. Coordinator runs: fol=1 st=../runs/st_mc2905v.json folo=0 fw=2 fth=30 fahead=100 K=500 smargin=1 and fw=3 fahead=150 smargin=0.5 (seed=../partials/vt1_2905_ref.json seedT=1228, maps=../maps/mcb3_p phase=0, T=2999).
 18:44 R1: partial 1400 folo=0 pos=5257,631 (real physics, tracking st_mc2905v within ~3px; v1 K=400 fw=2 fth=40 fahead=80 smargin=1)
+19:02 R2: partial 1750 pos~6937,837 (real physics, K=400 fw=2 fth=20 fahead=60 smargin=1 hs=1 from vt1_2905_ref@1228; lead ~+1 vs st_mc2905v)

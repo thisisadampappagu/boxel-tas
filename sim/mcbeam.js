@@ -88,7 +88,7 @@ function heurMap(g) {
 }
 // root
 const lvl = JSON.parse(fs.readFileSync(process.env.LEVEL || '/home/claude/boxel/mc.json'));
-let root = new Game(lvl); root.virtualTips = true;
+let root = new Game(lvl); root.virtualTips = args.vt == 1; // vt=1 is FASTER but WRONG after a tip is hidden (pair-order drift vs real game)
 root.tasStart(); root.player.jumpReady = false;
 root.player.position = { x: root.player.body.position.x, y: -root.player.body.position.y, z: 0 };
 root.pending = null; root.stepNo = 0; root.phase = +(args.phase || 0); root.folO = +(args.folo || 0);
