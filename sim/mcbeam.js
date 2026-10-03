@@ -54,7 +54,21 @@ const FIN = args.fin ? args.fin.split(',').map(Number) : null; // fin=X,Y : fram
 function heurFin(g) { const b = g.player.body, x = b.position.x, y = -b.position.y, vx = b.velocity.x; const dx = FIN[0] - x, dy = FIN[1] - y;
   const vxe = Math.max(+(args.fvmin || 3), Math.min(Math.abs(vx), +(args.fvmax || 12)));
   return Math.max(Math.abs(dx) / vxe, Math.abs(dy) / +(args.fvy || 6)) + +(args.fyw || 0.02) * Math.abs(dy) - (g.player.jumpReady ? +(args.fjr || 2) : 0) - (args.hs ? +args.hs * Math.hypot(b.velocity.x, b.velocity.y) : 0); }
+const TM = args.tmap ? (() => { const m = JSON.parse(fs.readFileSync(args.tmap + 'meta.json')); m.T = new Float32Array(fs.readFileSync(args.tmap + '.f32').buffer.slice(0)); return m; })() : null;
+function tmAt(x, y) { const m = TM; const c0 = Math.floor((x - m.X0) / m.RES), r0 = Math.floor((m.Y1 - y) / m.RES); let best = -1;
+  for (let rad = 0; rad <= 2 && best < 0; rad++) for (let dr = -rad; dr <= rad; dr++) for (let dc = -rad; dc <= rad; dc++) { if (Math.max(Math.abs(dr), Math.abs(dc)) != rad) continue;
+    const r = r0 + dr, c = c0 + dc; if (c < 0 || r < 0 || c >= m.W || r >= m.H) continue; const v = m.T[r * m.W + c]; if (v >= 0 && (best < 0 || v < best)) best = v + rad * 2; }
+  return best; }
+const TLOOK = (args.tlook || '4,8,16').split(',').map(Number);
+function heurTmap(g) { const P = g.player, b = P.body, x = b.position.x, y = -b.position.y, vx = b.velocity.x, vy = -b.velocity.y, G = 0.2778;
+  let h = tmAt(x, y); if (h < 0) h = 1e4;
+  for (const L of TLOOK) { // ballistic look-ahead (ignores collisions except via map validity)
+    let ok = true; for (let i = 1; i <= 4 && ok; i++) { const tt = L * i / 4; if (tmAt(x + vx * tt, y + vy * tt - G * tt * tt / 2) < 0) ok = false; }
+    if (!ok) break; const v = tmAt(x + vx * L, y + vy * L - G * L * L / 2); if (v >= 0) h = Math.min(h, v + L); }
+  if (P.jumpReady && (P.mode == 'control' || P.mode == 'jump')) h -= +(args.tjr || 3);
+  if (args.hs) h -= +args.hs * Math.hypot(vx, vy); return h; }
 function heur(g) {
+  if (TM) return heurTmap(g);
   if (FIN) return heurFin(g);
   if (FOL) { if (g.stepNo + (g.folO || 0) < FOL.length - 3) return heurFol(g); return -1e5 + heurMap(g); }
   if (RS && RJF !== null) { const k = Math.max(1, Math.min(RJ, RJF + (g.stepNo - RJT))); const r = rjDiff(g, RSALL[k - 1]); const r2 = rjDiff(g); return Math.min(r.dp + RWV * r.dv + RWA * r.da + RWW * r.dw + (r.jr ? 0 : 15), r2.dp + RWV * r2.dv + RWA * r2.da + RWW * r2.dw + (r2.jr ? 0 : 15)); }
