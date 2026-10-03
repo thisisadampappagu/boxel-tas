@@ -1,6 +1,6 @@
 // Frame-by-frame beam search for Mountain Climb (exact clones, distance-map heuristic).
 const fs = require('fs');
-const { Game, cloneGame } = require('./sim2.js');
+const { Game, cloneGame, Matter } = require('./sim2.js');
 const args = Object.fromEntries(process.argv.slice(2).map(a => a.split('=')));
 const K = +(args.K || 1000), TMAX = +(args.T || 800), BX = +(args.bx || 8), BV = +(args.bv || 1.0);
 const LOOK = +(args.look || 8), OUT = args.out || 'mcbeam_out.json', LOG = +(args.log || 25);
@@ -50,7 +50,11 @@ function heurFol(g) { const t = g.stepNo; let o = g.folO; const k0 = t + o; let 
   const TH = +(args.fth || 25);
   for (let k = Math.max(1, k0 - 3); k <= Math.min(FOL.length, k0 + FAHEAD); k++) { const d = folDiff(g, FOL[k - 1]); if (k > k0 && d > TH) continue; const c = d - FW * (k - t); if (c < best) { best = c; bk = k; } }
   g.folO = bk - t; return best - (args.hs ? +args.hs * Math.hypot(g.player.body.velocity.x, g.player.body.velocity.y) : 0); }
+const ENT = args.entry ? args.entry.split(',').map(Number) : null; // EX,EY,YMIN,BONUS
+const XEST = args.xest ? args.xest.split(',').map(Number) : null; // TF[,ywant,yw]
 function heur(g) {
+  if (XEST) { const b = g.player.body, x = b.position.x, y = -b.position.y; const rem = Math.max(0, XEST[0] - g.stepNo); let h = -(x + Math.max(0, b.velocity.x) * rem); if (XEST.length > 2) h += XEST[2] * Math.abs(y - XEST[1]); return h; }
+  if (ENT) { const b = g.player.body, x = b.position.x, y = -b.position.y; let h = Math.hypot(x - ENT[0], y - ENT[1]); if (g.player.jumpReady && y > ENT[2]) h -= ENT[3]; if (args.hx) h -= +args.hx * b.velocity.x; return h; }
   if (FOL) { if (g.stepNo + (g.folO || 0) < FOL.length - 3) return heurFol(g); return -1e5 + heurMap(g); }
   if (RS && RJF !== null) { const k = Math.max(1, Math.min(RJ, RJF + (g.stepNo - RJT))); const r = rjDiff(g, RSALL[k - 1]); const r2 = rjDiff(g); return Math.min(r.dp + RWV * r.dv + RWA * r.da + RWW * r.dw + (r.jr ? 0 : 15), r2.dp + RWV * r2.dv + RWA * r2.da + RWW * r2.dw + (r2.jr ? 0 : 15)); }
   if (RS) { const r = rjDiff(g); return r.dp + RWV * r.dv + RWA * r.da + RWW * r.dw + (r.jr ? 0 : 15); }
@@ -114,7 +118,7 @@ function polySep(A, B) { let best = -1e9;
   return best; }
 const SMARGIN = args.smargin ? +args.smargin : 0;
 function tooClose(g) { if (!SMARGIN) return false; const pv = g.player.body.parts.length > 1 ? g.player.body.parts[1].vertices : g.player.body.vertices;
-  for (const c of g.children) { if (!c.body || c.body.class != "spike" || c.position.z != 0) continue; const sp = c.body.parts.filter(q => q.isSensor && q !== c.body); for (const q of sp) if (polySep(pv, q.vertices) < SMARGIN) return true; }
+  for (const c of g.children) { if (!c.body || c.body.class != "spike" || c.position.z != 0) continue; const sp = c.body.parts.filter(q => q.isSensor && q !== c.body); for (const q of sp) { if (args.fastsm) { const A = g.player.body.bounds, B = q.bounds; const gap = Math.max(B.min.x - A.max.x, A.min.x - B.max.x, B.min.y - A.max.y, A.min.y - B.max.y); if (gap > 40 + SMARGIN) continue; } if (polySep(pv, q.vertices) < SMARGIN) return true; } }
   return false; }
 function ropeAnchor(P) { const n = P.rope.children.length; if (!n) return ''; const j = P.rope.children[n - 1], c = j.constraint, b = c.bodyB;
   return Math.round((b.position.x + c.pointB.x) / 8) + ':' + Math.round((b.position.y + c.pointB.y) / 8); }
@@ -136,6 +140,22 @@ function actionsFor(g) {
   else out.push({});
   return out;
 }
+const GRID = new Map(); let GRIDW = null; const GC = 32;
+function gridFor(world) { if (GRIDW) return; GRIDW = true;
+  for (const b of world.bodies) if (b.isStatic) { const B = b.bounds; for (let cx = Math.floor(B.min.x / GC); cx <= Math.floor(B.max.x / GC); cx++) for (let cy = Math.floor(B.min.y / GC); cy <= Math.floor(B.max.y / GC); cy++) { const k = cx * 100003 + cy; let l = GRID.get(k); if (!l) GRID.set(k, l = []); l.push(b); } } }
+function bodyHas(body, pt) { if (!Matter.Bounds.contains(body.bounds, pt)) return false; const P = body.parts;
+  for (let j = P.length === 1 ? 0 : 1; j < P.length; j++) { const q = P[j]; if (Matter.Bounds.contains(q.bounds, pt) && Matter.Vertices.contains(q.vertices, pt)) return true; } return false; }
+// returns {i (index in world.bodies), point} exactly as addRope would hit, or null
+function rayHit(g, px, py, mx, my, ctx) { const P = g.player; if (P.isFrozen()) return null; gridFor(g.world);
+  if (!ctx.idx) { ctx.idx = new Map(); ctx.dyn = []; g.world.bodies.forEach((b, i) => { ctx.idx.set(b, i); if (!b.isStatic) ctx.dyn.push(b); }); }
+  const length = 400, dx = mx - px, dy = my - py, dist = Math.sqrt(dx * dx + dy * dy);
+  const p1x = px, p1y = -py, p2x = px + dx * length / dist, p2y = -(py + dy * length / dist);
+  for (let i = 0; i < length; i += 4) { const pc = i / length, pt = { x: p1x + (p2x - p1x) * pc, y: p1y + (p2y - p1y) * pc };
+    let best = null, bi = 1e9; const l = GRID.get(Math.floor(pt.x / GC) * 100003 + Math.floor(pt.y / GC));
+    if (l) for (const b of l) { const bx = ctx.idx.get(b); if (bx < bi && bodyHas(b, pt)) { bi = bx; best = b; } }
+    for (const b of ctx.dyn) { const bx = ctx.idx.get(b); if (bx < bi && bodyHas(b, pt)) { bi = bx; best = b; } }
+    if (best && best.class != 'player') { const o = g.byName.get(best.name); if (o && o.visible == true && o.position.z == 0 && !(g.virtualTips && g.hiddenTips[o.name])) return { i: bi, point: pt }; } }
+  return null; }
 function actsOf(node) { const acts = []; while (node) { acts.push({ t: node.t, ...node.a }); node = node.p; } return acts.reverse(); }
 const t0 = Date.now();
 let finish = null;
@@ -143,15 +163,32 @@ const progress = [];
 for (let t = T0 + 1; t <= TMAX && !finish; t++) {
   const next = new Map();
   for (const st of states) {
-    for (const a of actionsFor(st.g)) {
-      const c = cloneGame(st.g); c.pending = a; c.jumpOk = true; c.ropeOk = true; c.stepNo = t;
-      c.step();
+    let base = null, preX = 0, preY = 0; const ctx = {};
+    const fastG = args.fastg && st.g.player.mode == 'grapple';
+    if (fastG) { preX = st.g.player.position.x; preY = st.g.player.position.y; base = cloneGame(st.g); base.pending = null; base.jumpOk = true; base.ropeOk = true; base.stepNo = t; base.step(); }
+    const AL = actionsFor(st.g); if (fastG) AL.push(AL.shift());
+    for (const a of AL) {
+      let c;
+      if (fastG && base.player.mode == 'grapple' && !base.dead && !base.finished) {
+        if (a.r === undefined) c = base;
+        else if (a.r === 'G') { if (!base.player.rope.children.length) continue; c = cloneGame(base); c.removeRope(); }
+        else { const ang = a.r * Math.PI / 180; const hit = rayHit(base, preX, preY, preX + Math.cos(ang), preY + Math.sin(ang), ctx);
+          if (!hit && args.fastcheck) { const d = cloneGame(base); const post = d.player.position; d.player.position = { x: preX, y: preY, z: post.z }; const r = d.addRope({ x: preX + Math.cos(ang), y: preY + Math.sin(ang) }); if (r) console.log('FASTCHECK MISS', t, a.r); }
+          if (!hit) continue;
+          c = cloneGame(base); c.removeRope(); c.player.rope.addJoints(c, c.player.body, c.world.bodies[hit.i], hit.point); c.player.rope.updateJoints(); c.ropeOk = hit.point;
+          if (args.fastcheck) { const d = cloneGame(base); const post = d.player.position; d.player.position = { x: preX, y: preY, z: post.z }; const r = d.addRope({ x: preX + Math.cos(ang), y: preY + Math.sin(ang) }); d.player.position = post; if (!r || r.x !== hit.point.x || r.y !== hit.point.y) console.log('FASTCHECK MISMATCH', t, a.r, JSON.stringify(r), JSON.stringify(hit.point)); } }
+        c.pending = a; c.stepNo = t;
+      } else {
+      c = cloneGame(st.g); c.pending = a; c.jumpOk = true; c.ropeOk = true; c.stepNo = t;
+      c.step(); }
       if (a.j && !c.jumpOk) continue;          // jump did nothing -> duplicate of no-jump
       if (a.r !== undefined && a.r !== 'G' && !c.ropeOk) continue; // grapple missed
       if (c.dead || tooClose(c)) continue;
       if (args.nograv && (c.world.gravity.x != 0 || c.world.gravity.y != 1)) continue;
       const node = { p: st.node, t, a };
       if (c.finished) { if (!finish) finish = { t, node }; continue; }
+      if (args.wedgegoal && !finish) { const P = c.player, b = P.body; const a2 = ((b.angle % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI), ca = ((177.483520 % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI); let da = Math.abs(a2 - ca); da = Math.min(da, 2 * Math.PI - da);
+        if (Math.max(Math.abs(b.position.x - 8691.880155), Math.abs(-b.position.y - 4000.119541), Math.abs(b.velocity.x), Math.abs(b.velocity.y), da, Math.abs(b.angularVelocity)) < 1e-5 && P.jumpReady && P.mode == 'control' && P.controls.right == 1 && P.controls.left == 0) { finish = { t, node }; console.log('WEDGE at', t); } }
       if (args.pruneg && c.player.mode == 'grapple' && !(-c.player.body.velocity.y > +args.pruneg)) continue;
       if (args.goalmode && c.player.mode == args.goalmode && !finish && (!args.goalvy || -c.player.body.velocity.y > +args.goalvy)) { finish = { t, node }; console.log('GOALMODE at', t); }
       if (RS) { const r = rjDiff(c); if (r.dp < +(args.rtp || 2) && r.dv < +(args.rtv || 0.3) && r.da < +(args.rta || 0.06) && r.dw < +(args.rtw || 0.02) && r.jr && !finish) { finish = { t, node }; console.log('REJOIN at', t, JSON.stringify(r)); } }
