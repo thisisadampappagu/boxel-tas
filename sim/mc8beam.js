@@ -50,7 +50,11 @@ function heurFol(g) { const t = g.stepNo; let o = g.folO; const k0 = t + o; let 
   const TH = +(args.fth || 25);
   for (let k = Math.max(1, k0 - 3); k <= Math.min(FOL.length, k0 + FAHEAD); k++) { const d = folDiff(g, FOL[k - 1]); if (k > k0 && d > TH) continue; const c = d - FW * (k - t); if (c < best) { best = c; bk = k; } }
   g.folO = bk - t; return best - (args.hs ? +args.hs * Math.hypot(g.player.body.velocity.x, g.player.body.velocity.y) : 0); }
+const ENT = args.entry ? args.entry.split(',').map(Number) : null; // EX,EY,YMIN,BONUS
+const XEST = args.xest ? args.xest.split(',').map(Number) : null; // TF[,ywant,yw]
 function heur(g) {
+  if (XEST) { const b = g.player.body, x = b.position.x, y = -b.position.y; const rem = Math.max(0, XEST[0] - g.stepNo); let h = -(x + Math.max(0, b.velocity.x) * rem); if (XEST.length > 2) h += XEST[2] * Math.abs(y - XEST[1]); return h; }
+  if (ENT) { const b = g.player.body, x = b.position.x, y = -b.position.y; let h = Math.hypot(x - ENT[0], y - ENT[1]); if (g.player.jumpReady && y > ENT[2]) h -= ENT[3]; if (args.hx) h -= +args.hx * b.velocity.x; return h; }
   if (FOL) { if (g.stepNo + (g.folO || 0) < FOL.length - 3) return heurFol(g); return -1e5 + heurMap(g); }
   if (RS && RJF !== null) { const k = Math.max(1, Math.min(RJ, RJF + (g.stepNo - RJT))); const r = rjDiff(g, RSALL[k - 1]); const r2 = rjDiff(g); return Math.min(r.dp + RWV * r.dv + RWA * r.da + RWW * r.dw + (r.jr ? 0 : 15), r2.dp + RWV * r2.dv + RWA * r2.da + RWW * r2.dw + (r2.jr ? 0 : 15)); }
   if (RS) { const r = rjDiff(g); return r.dp + RWV * r.dv + RWA * r.da + RWW * r.dw + (r.jr ? 0 : 15); }
@@ -183,6 +187,8 @@ for (let t = T0 + 1; t <= TMAX && !finish; t++) {
       if (args.nograv && (c.world.gravity.x != 0 || c.world.gravity.y != 1)) continue;
       const node = { p: st.node, t, a };
       if (c.finished) { if (!finish) finish = { t, node }; continue; }
+      if (args.wedgegoal && !finish) { const P = c.player, b = P.body; const a2 = ((b.angle % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI), ca = ((177.483520 % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI); let da = Math.abs(a2 - ca); da = Math.min(da, 2 * Math.PI - da);
+        if (Math.max(Math.abs(b.position.x - 8691.880155), Math.abs(-b.position.y - 4000.119541), Math.abs(b.velocity.x), Math.abs(b.velocity.y), da, Math.abs(b.angularVelocity)) < 1e-5 && P.jumpReady && P.mode == 'control' && P.controls.right == 1 && P.controls.left == 0) { finish = { t, node }; console.log('WEDGE at', t); } }
       if (args.pruneg && c.player.mode == 'grapple' && !(-c.player.body.velocity.y > +args.pruneg)) continue;
       if (args.goalmode && c.player.mode == args.goalmode && !finish && (!args.goalvy || -c.player.body.velocity.y > +args.goalvy)) { finish = { t, node }; console.log('GOALMODE at', t); }
       if (RS) { const r = rjDiff(c); if (r.dp < +(args.rtp || 2) && r.dv < +(args.rtv || 0.3) && r.da < +(args.rta || 0.06) && r.dw < +(args.rtw || 0.02) && r.jr && !finish) { finish = { t, node }; console.log('REJOIN at', t, JSON.stringify(r)); } }
